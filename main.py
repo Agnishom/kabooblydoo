@@ -27,12 +27,13 @@ def application_error(e):
     
 @app.route('/bobbym')
 def bobbym():
-    return markov()
+    f = open('resources/bobbym_quotes')
+    return markov(f)
 
-def markov():
+def markov(f):
     chain = {}
     
-    data = open('resources/bobbym_quotes').read().split('\n')
+    data = f.read().split('\n')
     data = ' '.join(data)
     data = data.split(' ')
     words = data
