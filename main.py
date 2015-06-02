@@ -2,7 +2,7 @@
 
 # Import the Flask Framework
 from flask import Flask
-import random
+import kabooblydoo
 app = Flask(__name__)
 # Note: We don't need to call run() since our application is embedded within
 # the App Engine WSGI application server.
@@ -27,39 +27,5 @@ def application_error(e):
     
 @app.route('/bobbym')
 def bobbym():
-    f = open('resources/bobbym_quotes')
-    return markov(f)
-
-def markov(f):
-    chain = {}
-    
-    data = f.read().split('\n')
-    data = ' '.join(data)
-    data = data.split(' ')
-    words = data
-    
-    prefix = " "
-    
-    for i in xrange(len(words)):
-    	prefix = words[i]
-    	try:
-    		suffix = words[i+1]
-    	except:
-    		suffix = ""
-    	if prefix in chain:
-    		chain[prefix].append(suffix)
-    	else:
-    		chain[prefix] = [suffix]
-    
-    text = ""
-    
-    state = random.choice(chain.keys())
-    for i in xrange(1000):
-    	text += " " + state
-    	print state, 
-    	if state not in chain:
-    		break
-    	state = random.choice(chain[state])
-    
-    return text
-
+    f = open('resources/bobbym_quotes').read()
+    return kabooblydoo.kabooblydoo(f)
