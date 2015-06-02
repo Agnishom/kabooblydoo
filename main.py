@@ -1,11 +1,8 @@
-"""`main` is the top level module for your Flask application."""
-
 # Import the Flask Framework
 from flask import Flask
 import kabooblydoo
 app = Flask(__name__)
-# Note: We don't need to call run() since our application is embedded within
-# the App Engine WSGI application server.
+app.debug = True
 
 
 @app.route('/')
@@ -25,7 +22,9 @@ def application_error(e):
     """Return a custom 500 error."""
     return 'Sorry, unexpected error: {}'.format(e), 500
     
-@app.route('/bobbym')
-def bobbym():
+@app.route('/bobbym/<int:n>')
+def bobbym(n=None):
     f = open('resources/bobbym_quotes').read()
+    if n:
+        return kabooblydoo.kabooblydoo(f,n)
     return kabooblydoo.kabooblydoo(f)
