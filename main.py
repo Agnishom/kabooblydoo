@@ -1,8 +1,8 @@
 # Import the Flask Framework
 from flask import Flask
+from flask import request
 import kabooblydoo
 app = Flask(__name__)
-app.debug = True
 
 
 @app.route('/')
@@ -22,9 +22,9 @@ def application_error(e):
     """Return a custom 500 error."""
     return 'Sorry, unexpected error: {}'.format(e), 500
     
-@app.route('/bobbym/<int:n>')
+@app.route('/bobbym', methods=['GET'])
 def bobbym(n=None):
     f = open('resources/bobbym_quotes').read()
-    if n:
-        return kabooblydoo.kabooblydoo(f,n)
+    if request.args.get('n'):
+        return kabooblydoo.kabooblydoo(f,int(request.args.get('n')))
     return kabooblydoo.kabooblydoo(f)
