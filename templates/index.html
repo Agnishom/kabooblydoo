@@ -1,14 +1,25 @@
-<!doctype html> <html> <head>
-	<title>Kaboobly Doo Generator</title> </head> <body>
+<!doctype html>
+<html>
+<head>
+	<title>Kaboobly Doo Generator</title>
+</head>
+<body>
 	<form action="/kabooblydoo" method="POST">
 		<ul>
 			<li>Prefix Length:</li>
 			<input type="number" name="n" value="2">
 			<li> Output Length (Words):</li>
 			<input type="number" name="words" value="1000">
-			<li>URL:</li>
-			<input type="url" name="url">
+			<li>Source:</li>
+			<ul>
+				<li><input type="radio" name="source" value="url">URL: <input type="url" name="url" /></li>
+				<li><input type="radio" name="source" value="book">Book: <select name="books">
+					<option value="bobbym">The Blue book of bobbym quotes</option>
+				</select></li>
+				<li><input type="radio" name="source" value="custom">Custom Text: <textarea name="message" rows="10" cols="30"></textarea> </li>
+			</ul>
 		</ul>
 		<input type="submit" value="Submit">
-	</form> </body>
+	</form>
+</body>
 </html>
