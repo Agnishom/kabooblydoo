@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    render_template('index.html')
+    return render_template('index.html')
 
 
 @app.errorhandler(404)
