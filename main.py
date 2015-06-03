@@ -32,9 +32,11 @@ def bobbym(n=None):
     
 @app.route('/kabooblydoo', methods=['GET', 'POST'])
 def nonsense():
+    n = int(request.form['n'])
+    w = int(request.form['words'])
     if request.form['source']=='url':
         s = filter(lambda x: x in printable, urllib2.urlopen(request.form['url']).read())
-        n = int(request.form['n'])
-        w = int(request.form['words'])
-        return render_template('output.html', error=None, output=kabooblydoo.kabooblydoo(s,n,w))
-    
+    elif request.form['source']=='book':
+        if request.form['books']=='bobbym':
+            s = open('resources/bobbym_quotes').read()
+    return render_template('output.html', error=None, output=kabooblydoo.kabooblydoo(s,n,w))
