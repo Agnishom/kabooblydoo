@@ -1,14 +1,14 @@
 # Import the Flask Framework
 from flask import Flask
 from flask import request
+from flask import render_template
 import kabooblydoo
 app = Flask(__name__)
 
 
 @app.route('/')
 def hello():
-    """Return a friendly HTTP greeting."""
-    return 'Hello World!'
+    render_template('index.html')
 
 
 @app.errorhandler(404)
