@@ -2,7 +2,8 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-import kabooblydoo
+from string import printable
+import kabooblydoo, urllib2
 app = Flask(__name__)
 
 
@@ -28,3 +29,10 @@ def bobbym(n=None):
     if request.args.get('n'):
         return kabooblydoo.kabooblydoo(f,int(request.args.get('n')))
     return kabooblydoo.kabooblydoo(f)
+    
+@app.route('/kabooblydoo', methods=['GET', 'POST'])
+def nonsense():
+    if request.method=='POST':
+        s = filter(lambda x: x in printable, urllib2.urlopen(request.form['url']).read())
+        n = request.form['length']
+        return kabooblydoo.kabooblydoo(s,n)
