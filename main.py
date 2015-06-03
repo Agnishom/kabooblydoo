@@ -39,4 +39,8 @@ def nonsense():
     elif request.form['source']=='book':
         if request.form['books']=='bobbym':
             s = open('resources/bobbym_quotes').read()
+        elif request.form['books']=='aesop':
+            s = open('resources/aesop').read()
+    else:
+        s = request.form['message']
     return render_template('output.html', error=None, output=kabooblydoo.kabooblydoo(s,n,w))
