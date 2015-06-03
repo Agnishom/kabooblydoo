@@ -1,6 +1,6 @@
 import random
 
-def kabooblydoo(s,n=2):
+def kabooblydoo(s,n=2,w=1000):
 	chain = {}
 
 	data = s.split('\n')
@@ -27,7 +27,7 @@ def kabooblydoo(s,n=2):
 	text = ""
 
 	state = random.choice(chain.keys())
-	for i in xrange(1000):
+	for i in xrange(w):
 		text += " " + state.split(' ')[0]
 		if state not in chain:
 			break
