@@ -2,6 +2,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
+from flask import url_for
 from string import printable
 import kabooblydoo, urllib2
 app = Flask(__name__)
@@ -9,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return render_template('index.html')
+    return render_template('index.html',style=url_for('static', filename='style.css'))
 
 
 @app.errorhandler(404)
@@ -49,4 +50,4 @@ def nonsense():
             s = open('resources/benjamin').read()
     else:
         s = request.form['message']
-    return render_template('output.html', error=None, output=kabooblydoo.kabooblydoo(s,n,w))
+    return render_template('output.html', error=None, output=kabooblydoo.kabooblydoo(s,n,w),style=url_for('static', filename='style.css'))
