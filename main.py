@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return render_template('index.html',style=url_for('static', filename='style.css'),pic=url_for('static',filename='images/cover.png'))
+    return render_template('index.html')
 
 
 @app.errorhandler(404)
@@ -50,4 +50,4 @@ def nonsense():
             s = open('resources/benjamin').read()
     else:
         s = request.form['message']
-    return render_template('output.html', error=None, output=kabooblydoo.kabooblydoo(s,n,w),style=url_for('static', filename='style.css'))
+    return render_template('output.html', error=None, output=kabooblydoo.kabooblydoo(s,n,w))
