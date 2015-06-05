@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return render_template('index.html',style=url_for('static', filename='style.css'))
+    return render_template('index.html',style=url_for('static', filename='style.css'),pic=url_for('static',filename='images/cover.png'))
 
 
 @app.errorhandler(404)
