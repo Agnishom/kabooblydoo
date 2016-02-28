@@ -3,8 +3,9 @@ from flask import Flask
 from flask import request
 from flask import render_template
 from flask import url_for
+from flask import redirect
 from string import printable
-import kabooblydoo, urllib2
+import kabooblydoo, urllib2, re
 app = Flask(__name__)
 
 
@@ -51,3 +52,10 @@ def nonsense():
     else:
         s = request.form['message']
     return render_template('output.html', error=None, output=kabooblydoo.kabooblydoo(s,n,w))
+    
+@app.route('/youtubedl', methods = ['GET'])
+def generate_link():
+    search_link = "http://www.youtube.com/results?search_query="+request.args.get('query')
+    youtube_id = re.findall(r'href=\"\/watch\?v=(.{11})',urllib2.urlopen(search_link).read())[0]
+    link = "http://www.youtubeinmp3.com/fetch/?video="+"http://www.youtube.com/watch?v=" + youtube_id
+    return redirect(link, code=302)
